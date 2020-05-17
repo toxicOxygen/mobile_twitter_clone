@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone/custom_widgets/appbar_icon_widget.dart';
+import '../custom_widgets/appbar_icon_widget.dart';
+import '../custom_widgets/bottom_navigator.dart';
 import './create_tweet_page.dart';
 import './tweet_detail_page.dart';
 import '../custom_widgets/tweet_card.dart';
@@ -29,27 +30,7 @@ class HomePage extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: ()=>Navigator.of(context).pushNamed(CreateTweetPage.tag),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Container(height: 0.01,)
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Container(height: 0.01,)
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none),
-            title: Container(height: 0.01,)
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mail_outline),
-            title: Container(height: 0.01,)
-          )
-        ],
-      ),
+      bottomNavigationBar: MyBottomNavigationBar(currentPageIndex: 0,),
       body: ListView.builder(
         itemBuilder: (ctx,i){
           if(i%3 == 0){

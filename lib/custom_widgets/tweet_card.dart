@@ -67,16 +67,16 @@ class TweetCard extends StatelessWidget {
                       ),
                       SizedBox(height: 5,),
                       tweetImages.isEmpty? Container(height: 0.001,):
-                      Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
+                      Container(
+                        height: height* 0.23,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Image.network(
-                          'https://tinyurl.com/yb6qod88',
-                          height: height* 0.23,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
+                          border: Border.all(color: Colors.black12),
+                          image: DecorationImage(
+                            image: NetworkImage('https://tinyurl.com/yb6qod88'),
+                            fit: BoxFit.cover,
+                          )
                         ),
                       ),
                       Row(
