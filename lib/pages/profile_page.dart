@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../custom_widgets/profile_photo_widget.dart';
+import './create_tweet_page.dart';
+import '../custom_widgets/profile_photo_main_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   static String tag = 'profile-page';
@@ -16,20 +17,16 @@ class ProfilePage extends StatelessWidget {
           subtitle: Text('827 tweets'),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          ProfilePhotoWidget(),
-          Container(
-            padding: const EdgeInsets.only(left: 18,top: 10),
-            width: double.infinity,
-            child: Text('Baffour Kusi',style: TextStyle(fontWeight: FontWeight.bold),)
-          ),
-          Container(
-              padding: const EdgeInsets.only(left: 18),
-              width: double.infinity,
-              child: Text('@MOBZ',style: TextStyle(color: Colors.black54),)
-          )
-        ],
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: ()=>Navigator.of(context).pushNamed(CreateTweetPage.tag),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            ProfilePhotoMainWidget()
+          ],
+        ),
       ),
     );
   }
