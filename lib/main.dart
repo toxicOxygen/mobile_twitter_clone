@@ -7,6 +7,7 @@ import './pages/tweet_detail_page.dart';
 import './pages/add_comment_page.dart';
 import './pages/create_tweet_page.dart';
 import './pages/profile_page.dart';
+import './pages/notifications_page.dart';
 import './pages/search_page.dart';
 
 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         AddCommentPage.tag : (context)=> AddCommentPage(),
         CreateTweetPage.tag : (context)=> CreateTweetPage(),
         ProfilePage.tag : (context)=> ProfilePage(),
-        SearchTweetPage.tag : (context)=> SearchTweetPage()
+        SearchTweetPage.tag : (context)=> SearchTweetPage(),
+        NotificationsPage.tag : (context)=> NotificationsPage()
       },
     );
   }
