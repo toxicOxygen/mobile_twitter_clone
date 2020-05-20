@@ -74,7 +74,7 @@ class SideBarWidget extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.person),
+          leading: Icon(Icons.perm_identity),
           title: Text('Profile'),
           onTap: ()=>Navigator.of(context).popAndPushNamed(ProfilePage.tag),
         ),

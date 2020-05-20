@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../custom_widgets/bottom_navigator.dart';
 import '../custom_widgets/appbar_icon_widget.dart';
 import '../custom_widgets/sidebar_widget.dart';
+import '../sub_pages/notifications_mentions_page.dart';
 
 class NotificationsPage extends StatelessWidget {
   static String tag = 'notifications-page';
@@ -44,7 +45,14 @@ class NotificationsPage extends StatelessWidget {
               pinned: true,
 
             ),
-
+            SliverFillRemaining(
+              child: TabBarView(
+                children: <Widget>[
+                  MentionsPage(data: ['1'],),
+                  Center(child: Text('Page 2'),),
+                ],
+              ),
+            )
           ],
         ),
       ),

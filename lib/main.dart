@@ -9,6 +9,7 @@ import './pages/create_tweet_page.dart';
 import './pages/profile_page.dart';
 import './pages/notifications_page.dart';
 import './pages/search_page.dart';
+import './pages/messages_page.dart';
 
 
 void main(){
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         CreateTweetPage.tag : (context)=> CreateTweetPage(),
         ProfilePage.tag : (context)=> ProfilePage(),
         SearchTweetPage.tag : (context)=> SearchTweetPage(),
-        NotificationsPage.tag : (context)=> NotificationsPage()
+        NotificationsPage.tag : (context)=> NotificationsPage(),
+        MessagesPage.tag : (context) => MessagesPage(),
       },
     );
   }

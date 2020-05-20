@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../pages/home_page.dart';
 import '../pages/search_page.dart';
 import '../pages/notifications_page.dart';
+import '../pages/messages_page.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
   final int currentPageIndex;
@@ -25,6 +26,7 @@ class MyBottomNavigationBar extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed(NotificationsPage.tag);
             break;
           case 3:
+            Navigator.of(context).pushReplacementNamed(MessagesPage.tag);
             break;
         }
       },
