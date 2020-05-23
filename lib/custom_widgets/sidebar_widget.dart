@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../pages/welcome_page.dart';
+import '../providers/auth_providers.dart';
 import '../pages/profile_page.dart';
 
 class SideBarWidget extends StatelessWidget {
@@ -89,7 +92,15 @@ class SideBarWidget extends StatelessWidget {
           leading: Icon(Icons.exit_to_app),
           title: Text('Logout'),
           onTap: (){
-
+            final auth = Provider.of<AuthProvider>(context,listen: false);
+            auth.logout().then((value){
+              if(value){
+                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed(WelcomePage.tag);
+              }
+            }).catchError((e){
+              print(e);
+            });
           },
         )
       ],

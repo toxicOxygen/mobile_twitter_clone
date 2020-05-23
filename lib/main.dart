@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter_clone/providers/auth_providers.dart';
 import './pages/welcome_page.dart';
 import './pages/login_page.dart';
 import './pages/signup_page.dart';
@@ -10,6 +12,7 @@ import './pages/profile_page.dart';
 import './pages/notifications_page.dart';
 import './pages/search_page.dart';
 import './pages/messages_page.dart';
+import './pages/splash_page.dart';
 
 
 void main(){
@@ -19,27 +22,41 @@ void main(){
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Twitter Clone',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity
+    return MultiProvider(
+      child: Consumer<AuthProvider>(
+        builder: (ctx,auth,_)=> MaterialApp(
+          title: 'Twitter Clone',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              visualDensity: VisualDensity.adaptivePlatformDensity
+          ),
+          home: auth.isAuthenticated ? HomePage() : FutureBuilder(
+            future: auth.tryAutoLogin(),
+            builder: (ctx,snapshot){
+              if(snapshot.connectionState == ConnectionState.waiting)
+                return SplashPage();
+              return WelcomePage();
+            },
+          ),
+          routes: {
+            WelcomePage.tag : (context)=> WelcomePage(),
+            LoginPage.tag : (context)=> LoginPage(),
+            SignUpPage.tag : (context)=> SignUpPage(),
+            HomePage.tag : (context)=>HomePage(),
+            TweetDetailPage.tag : (context)=> TweetDetailPage(),
+            AddCommentPage.tag : (context)=> AddCommentPage(),
+            CreateTweetPage.tag : (context)=> CreateTweetPage(),
+            ProfilePage.tag : (context)=> ProfilePage(),
+            SearchTweetPage.tag : (context)=> SearchTweetPage(),
+            NotificationsPage.tag : (context)=> NotificationsPage(),
+            MessagesPage.tag : (context) => MessagesPage(),
+          },
+        )
       ),
-      home: WelcomePage(),
-      routes: {
-        WelcomePage.tag : (context)=> WelcomePage(),
-        LoginPage.tag : (context)=> LoginPage(),
-        SignUpPage.tag : (context)=> SignUpPage(),
-        HomePage.tag : (context)=>HomePage(),
-        TweetDetailPage.tag : (context)=> TweetDetailPage(),
-        AddCommentPage.tag : (context)=> AddCommentPage(),
-        CreateTweetPage.tag : (context)=> CreateTweetPage(),
-        ProfilePage.tag : (context)=> ProfilePage(),
-        SearchTweetPage.tag : (context)=> SearchTweetPage(),
-        NotificationsPage.tag : (context)=> NotificationsPage(),
-        MessagesPage.tag : (context) => MessagesPage(),
-      },
+      providers: [
+        ChangeNotifierProvider.value(value: AuthProvider())
+      ],
     );
   }
 }

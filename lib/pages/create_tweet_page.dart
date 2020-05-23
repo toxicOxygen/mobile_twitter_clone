@@ -39,14 +39,30 @@ class CreateTweetPage extends StatelessWidget {
                 ),
                 SizedBox(width: 10,),
                 Expanded(
-                  child: TextField(
-                    maxLength: 280,
-                    maxLines: 10,
-                    minLines: 3,
-                    decoration: InputDecoration(
-                        hintText: "What's on your mind?",
-                        border: InputBorder.none
-                    ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      TextField(
+                        maxLength: 280,
+                        maxLines: 10,
+                        minLines: 4,
+                        decoration: InputDecoration(
+                            hintText: "What's on your mind?",
+                            border: InputBorder.none
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(
+                              Icons.image,
+                              color: Colors.blue.withAlpha(180),
+                            ),
+                            onPressed: (){},
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 )
               ],
