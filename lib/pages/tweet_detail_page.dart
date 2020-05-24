@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:twitter_clone/custom_widgets/tweet_card.dart';
 import './add_comment_page.dart';
 import '../custom_widgets/tweet_detail_widget.dart';
+import '../models/posts.dart';
 
 class TweetDetailPage extends StatelessWidget {
   static String tag = 'tweet-detail-page';
 
   @override
   Widget build(BuildContext context) {
+    Map<String,dynamic> t = ModalRoute.of(context).settings.arguments;
+    Post post = t['post'];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -24,11 +27,14 @@ class TweetDetailPage extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (ctx,i){
           if(i == 0){
-            return TweetDetailWidget();
+            return TweetDetailWidget(
+              tweet: post.tweet,
+              images: post.images,
+            );
           }
-          return TweetCard(tweetImages: [],);
+          return TweetCard();
         },
-        itemCount: 9,
+        itemCount: post.comments.length + 1,
       ),
     );
   }

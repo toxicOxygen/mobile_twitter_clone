@@ -8,7 +8,7 @@ import 'package:twitter_clone/extras/exceptions.dart';
 class AuthProvider extends ChangeNotifier{
   String _token;
   String _userId;
-  String _baseUrl = 'https://2ebc49c9.ngrok.io';
+  String _baseUrl = 'https://603b1cce.ngrok.io';
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -29,6 +29,8 @@ class AuthProvider extends ChangeNotifier{
       'password1':password,
       'password2':password
     }).then((value){
+      if(value.statusCode != 200)
+        throw HttpException('Login failed');
       return json.decode(value.body);
     }).then((value) async{
       if(value['key'] == null)

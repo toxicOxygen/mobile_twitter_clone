@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_clone/models/images.dart';
 
 class TweetDetailWidget extends StatelessWidget {
+  final String tweet;
+  final List<PostImage> images;
+
+  TweetDetailWidget({
+    this.tweet = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
+    this.images = const []
+  });
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ListTile(
           leading: CircleAvatar(
@@ -25,30 +35,29 @@ class TweetDetailWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 13),
           child: Text(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
-                "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
-                "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                "Duis aute irure dolor in reprehenderit in ...",
+            tweet,
             style: Theme.of(context).textTheme.headline5.copyWith(
                 color: Colors.black87
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(13.0),
-          child: Container(
-            width: double.infinity,
-            height: height * 0.30,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.black12),
-                image: DecorationImage(
-                    image: NetworkImage('https://tinyurl.com/yb6qod88'),
-                    fit: BoxFit.cover
-                )
+        if(images.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.all(13.0),
+            child: Container(
+              width: double.infinity,
+              height: height * 0.30,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.black12),
+                  //tODO put image carousel here
+                  image: DecorationImage(
+                      image: NetworkImage(images[0].image),
+                      fit: BoxFit.cover
+                  )
+              ),
             ),
           ),
-        ),
         Container(
           padding: const EdgeInsets.only(left: 13),
           width: double.infinity,

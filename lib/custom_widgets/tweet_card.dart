@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import '../models/images.dart';
 
 class TweetCard extends StatelessWidget {
   final String userProfileImageUrl;
-  final List<String> tweetImages;
+  final String tweet;
+  final List<PostImage> tweetImages;
   final VoidCallback onTap;
 
   TweetCard({
     this.userProfileImageUrl,
-    this.tweetImages,
-    this.onTap
+    this.tweetImages = const [],
+    this.onTap,
+    this.tweet = "Yo I'm on the phone with infinity ward. Which one y'all want gone.",
   });
 
   @override
@@ -61,8 +64,7 @@ class TweetCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Yo I'm on the phone with infinity ward. Which one y'all want"
-                          " gone?",
+                        "$tweet",
                         style: TextStyle(color: Colors.black87),
                       ),
                       SizedBox(height: 5,),
@@ -74,7 +76,7 @@ class TweetCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: Colors.black12),
                           image: DecorationImage(
-                            image: NetworkImage('https://tinyurl.com/yb6qod88'),
+                            image: NetworkImage(tweetImages[0].image),
                             fit: BoxFit.cover,
                           )
                         ),

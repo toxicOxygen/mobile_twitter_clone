@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:twitter_clone/providers/auth_providers.dart';
+import './providers/auth_providers.dart';
+import './providers/tweet_provider.dart';
 import './pages/welcome_page.dart';
 import './pages/login_page.dart';
 import './pages/signup_page.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
         )
       ),
       providers: [
-        ChangeNotifierProvider.value(value: AuthProvider())
+        ChangeNotifierProvider.value(value: AuthProvider()),
+        ChangeNotifierProvider.value(value: TweetProvider())
       ],
     );
   }
