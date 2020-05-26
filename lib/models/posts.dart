@@ -23,25 +23,30 @@ class Post {
     id = json['id'];
     user = json['user'];
     tweet = json['tweet'];
-    if (json['images'] != null) {
-      images = new List<PostImage>();
-      json['images'].forEach((v) {
-        images.add(new PostImage.fromJson(v));
-      });
-    }
     created = json['created'];
-    if (json['comments'] != null) {
-      comments = new List<Comment>();
-      json['comments'].forEach((v) {
-        comments.add(new Comment.fromJson(v));
-      });
+
+    if(json['comments'] != null){
+      comments = List<Comment>();
+      for(var comment in json['comments']){
+        comments.add(Comment.fromJson(comment));
+      }
     }
-    if (json['users_like'] != null) {
-      usersLike = new List<Null>();
-      json['users_like'].forEach((v) {
-        usersLike.add(v);
-      });
+
+    if(json['images'] != null){
+      images = List<PostImage>();
+      for(var image in json['images']){
+        images.add(PostImage.fromJson(image));
+      }
     }
+
+    if(json['images_like'] != null){
+      usersLike = List<int>();
+      for(var user in json['images_like']){
+        usersLike.add(user);
+      }
+    }
+
+    print("$id >>> $comments >>> $tweet >>> $usersLike");
   }
 
   Map<String, dynamic> toJson() {

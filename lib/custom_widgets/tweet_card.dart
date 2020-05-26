@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/images.dart';
+import './images_grid_widget.dart';
 
 class TweetCard extends StatelessWidget {
   final String userProfileImageUrl;
@@ -57,9 +58,15 @@ class TweetCard extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: 'Seth Huntsmen ',
-                              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold
+                              )
                             ),
-                            TextSpan(text: '@bk_windfred',style: TextStyle(color: Colors.black45))
+                            TextSpan(
+                              text: '@bk_windfred',
+                              style: TextStyle(color: Colors.black45)
+                            )
                           ]
                         ),
                       ),
@@ -69,17 +76,9 @@ class TweetCard extends StatelessWidget {
                       ),
                       SizedBox(height: 5,),
                       tweetImages.isEmpty? Container(height: 0.001,):
-                      Container(
-                        height: height* 0.23,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.black12),
-                          image: DecorationImage(
-                            image: NetworkImage(tweetImages[0].image),
-                            fit: BoxFit.cover,
-                          )
-                        ),
+                      ImagesGridWidget(
+                        images: tweetImages,
+                        height: height * .23,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TweetProvider extends ChangeNotifier{
-  final String _baseUrl = 'https://603b1cce.ngrok.io';
+  final String _baseUrl = 'http://kwaku96.pythonanywhere.com';
 
   final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
 
@@ -16,10 +16,11 @@ class TweetProvider extends ChangeNotifier{
     return _posts;
   }
 
-  Future<void> getPosts() async{
+  Future<List<Post>> getPosts() async{
     var url = "$_baseUrl/api/v1/posts/";
 
     return _getToken().then((value){
+      _posts.clear();
       return http.get(
           url,
           headers: {"Authorization":value}
@@ -31,12 +32,15 @@ class TweetProvider extends ChangeNotifier{
       return json.decode(value.body);
     }).then((value){
       for(var item in value){
-        print(item);
         _posts.add(Post.fromJson(item));
       }
       notifyListeners();
+      return _posts;
+    }).then((value){
+      return value;
     }).catchError((e){
       print(e);
+      return e;
     });
   }
 

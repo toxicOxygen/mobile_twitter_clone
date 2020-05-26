@@ -8,8 +8,32 @@ import '../custom_widgets/tweet_card.dart';
 import '../custom_widgets/sidebar_widget.dart';
 import '../providers/tweet_provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static String tag = 'home-page';
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  bool _isInit = true;
+  bool _isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    if(_isInit){
+      setState(() { _isLoading = true; });
+      Provider.of<TweetProvider>(context).getPosts()
+      .then((_){
+        setState(() {_isLoading = false; });
+      }).catchError((e){
+        setState(() {_isLoading = false; });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,25 +59,20 @@ class HomePage extends StatelessWidget {
             onPressed: ()=>Navigator.of(context).pushNamed(CreateTweetPage.tag),
           ),
           bottomNavigationBar: MyBottomNavigationBar(currentPageIndex: 0,),
-          body: FutureBuilder(
-            future: tweetProvider.getPosts(),
-            builder: (ctx,snapshot){
-              if(snapshot.connectionState == ConnectionState.waiting)
-                return Center(child: CircularProgressIndicator());
-              return ListView.builder(
-                itemBuilder: (ctx,i){
-                  return TweetCard(
-                    tweet: tweetProvider.posts[i].tweet,
-                    tweetImages: tweetProvider.posts[i].images,
-                    onTap: ()=>Navigator.of(context).pushNamed(
+          body: _isLoading ?
+            Center(child: CircularProgressIndicator(),) :
+            ListView.builder(
+            itemBuilder: (ctx,i){
+              return TweetCard(
+                  tweet: tweetProvider.posts[i].tweet,
+                  tweetImages: tweetProvider.posts[i].images,
+                  onTap: ()=>Navigator.of(context).pushNamed(
                       TweetDetailPage.tag,
                       arguments: {'post':tweetProvider.posts[i]}
-                    )
-                  );
-                },
-                itemCount: tweetProvider.posts.length,
+                  )
               );
             },
+            itemCount: tweetProvider.posts.length,
           ),
           drawer: Drawer(
             child: SideBarWidget(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone/models/images.dart';
+import '../models/images.dart';
+import './images_grid_widget.dart';
 
 class TweetDetailWidget extends StatelessWidget {
   final String tweet;
@@ -44,18 +45,9 @@ class TweetDetailWidget extends StatelessWidget {
         if(images.isNotEmpty)
           Padding(
             padding: const EdgeInsets.all(13.0),
-            child: Container(
-              width: double.infinity,
-              height: height * 0.30,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.black12),
-                  //tODO put image carousel here
-                  image: DecorationImage(
-                      image: NetworkImage(images[0].image),
-                      fit: BoxFit.cover
-                  )
-              ),
+            child: ImagesGridWidget(
+              height: height * .3,
+              images: images,
             ),
           ),
         Container(
