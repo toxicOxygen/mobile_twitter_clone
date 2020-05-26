@@ -16,6 +16,10 @@ class TweetProvider extends ChangeNotifier{
     return _posts;
   }
 
+  Post getPostLocally(int id){
+    return _posts.firstWhere((element) => element.id == id);
+  }
+
   Future<List<Post>> getPosts() async{
     var url = "$_baseUrl/api/v1/posts/";
 

@@ -6,13 +6,15 @@ class TweetCard extends StatelessWidget {
   final String userProfileImageUrl;
   final String tweet;
   final List<PostImage> tweetImages;
+  final int postId;
   final VoidCallback onTap;
 
   TweetCard({
     this.userProfileImageUrl,
     this.tweetImages = const [],
     this.onTap,
-    this.tweet = "Yo I'm on the phone with infinity ward. Which one y'all want gone.",
+    @required this.postId,
+    this.tweet = "Yo I'm on the phone with infinity ward.",
   });
 
   @override
@@ -79,6 +81,7 @@ class TweetCard extends StatelessWidget {
                       ImagesGridWidget(
                         images: tweetImages,
                         height: height * .23,
+                        postId: postId,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

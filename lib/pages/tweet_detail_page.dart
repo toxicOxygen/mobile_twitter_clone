@@ -30,9 +30,13 @@ class TweetDetailPage extends StatelessWidget {
             return TweetDetailWidget(
               tweet: post.tweet,
               images: post.images,
+              postId: post.id,
             );
           }
-          return TweetCard();
+          //TODO replace id with tweet id
+          return TweetCard(
+            postId: 1,
+          );
         },
         itemCount: post.comments.length + 1,
       ),

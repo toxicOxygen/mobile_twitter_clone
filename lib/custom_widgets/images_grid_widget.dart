@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import '../models/images.dart';
+import '../pages/view_tweet_image_page.dart';
 
 class ImagesGridWidget extends StatelessWidget {
   final List<PostImage> images;
+  final int postId;
   final double height;
 
-  ImagesGridWidget({@required this.images,@required this.height});
+  ImagesGridWidget({
+    @required this.images,
+    @required this.height,
+    @required this.postId
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +24,17 @@ class ImagesGridWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.black12),
       ),
-      child: ClipRRect(
-        child: _buildGrid(),
-        borderRadius: BorderRadius.circular(20),
+      child: InkWell(
+        onTap: (){
+          Navigator.of(context).pushNamed(
+            TweetImageViewPage.tag,
+            arguments:{'id':postId}
+          );
+        },
+        child: ClipRRect(
+          child: _buildGrid(),
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
     );
   }
@@ -44,6 +58,7 @@ class ImagesGridWidget extends StatelessWidget {
               height: double.infinity,
             ),
           ),
+          SizedBox(width: 2,),
           Expanded(
             child: Image.network(
               images[1].image,
@@ -63,6 +78,7 @@ class ImagesGridWidget extends StatelessWidget {
             height: double.infinity,
           ),
         ),
+        SizedBox(width: 2,),
         Expanded(
           child: Column(
             children: <Widget>[
@@ -73,6 +89,7 @@ class ImagesGridWidget extends StatelessWidget {
                   width: double.infinity,
                 ),
               ),
+              SizedBox(height: 2,),
               Expanded(
                 child: Image.network(
                   images[2].image,

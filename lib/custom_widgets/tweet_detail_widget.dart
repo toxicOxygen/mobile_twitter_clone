@@ -5,10 +5,12 @@ import './images_grid_widget.dart';
 class TweetDetailWidget extends StatelessWidget {
   final String tweet;
   final List<PostImage> images;
+  final int postId;
 
   TweetDetailWidget({
     this.tweet = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
-    this.images = const []
+    this.images = const [],
+    @required this.postId,
   });
 
   @override
@@ -48,6 +50,7 @@ class TweetDetailWidget extends StatelessWidget {
             child: ImagesGridWidget(
               height: height * .3,
               images: images,
+              postId: postId,
             ),
           ),
         Container(

@@ -31,6 +31,7 @@ dependencies:
   http: ^0.12.1
   provider: ^4.1.2
   shared_preferences: ^0.5.7+3
+  carousel_slider: ^2.1.0
   multi_image_picker: ^4.6.7
 
 

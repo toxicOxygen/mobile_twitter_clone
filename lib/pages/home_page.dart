@@ -64,12 +64,13 @@ class _HomePageState extends State<HomePage> {
             ListView.builder(
             itemBuilder: (ctx,i){
               return TweetCard(
-                  tweet: tweetProvider.posts[i].tweet,
-                  tweetImages: tweetProvider.posts[i].images,
-                  onTap: ()=>Navigator.of(context).pushNamed(
-                      TweetDetailPage.tag,
-                      arguments: {'post':tweetProvider.posts[i]}
-                  )
+                postId: tweetProvider.posts[i].id,
+                tweet: tweetProvider.posts[i].tweet,
+                tweetImages: tweetProvider.posts[i].images,
+                onTap: ()=>Navigator.of(context).pushNamed(
+                    TweetDetailPage.tag,
+                    arguments: {'post':tweetProvider.posts[i]}
+                )
               );
             },
             itemCount: tweetProvider.posts.length,

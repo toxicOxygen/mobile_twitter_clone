@@ -14,6 +14,7 @@ import './pages/notifications_page.dart';
 import './pages/search_page.dart';
 import './pages/messages_page.dart';
 import './pages/splash_page.dart';
+import './pages/view_tweet_image_page.dart';
 
 
 void main(){
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
             SearchTweetPage.tag : (context)=> SearchTweetPage(),
             NotificationsPage.tag : (context)=> NotificationsPage(),
             MessagesPage.tag : (context) => MessagesPage(),
+            TweetImageViewPage.tag : (context)=> TweetImageViewPage()
           },
         )
       ),
