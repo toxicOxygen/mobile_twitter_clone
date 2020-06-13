@@ -8,7 +8,8 @@ import 'package:twitter_clone/extras/exceptions.dart';
 class AuthProvider extends ChangeNotifier{
   String _token;
   String _userId;
-  String _baseUrl = 'http://kwaku96.pythonanywhere.com';
+  //String _baseUrl = 'https://warm-hollows-55235.herokuapp.com';
+  String _baseUrl = "https://kwaku96.pythonanywhere.com";
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 

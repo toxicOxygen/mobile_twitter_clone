@@ -87,14 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (val)=> isEmailValid(val),
                       ),
                       TextFormField(
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Username',
-                        ),
-                        onSaved: (val)=> _authData['username'] = val,
-                        validator: (val)=> isUsernameValid(val),
-                      ),
-                      TextFormField(
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
                         decoration: InputDecoration(

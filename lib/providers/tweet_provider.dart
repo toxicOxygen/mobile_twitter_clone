@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TweetProvider extends ChangeNotifier{
-  final String _baseUrl = 'http://kwaku96.pythonanywhere.com';
+  //final String _baseUrl = 'https://warm-hollows-55235.herokuapp.com';
+  String _baseUrl = "https://kwaku96.pythonanywhere.com";
 
   final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
 
@@ -26,8 +27,8 @@ class TweetProvider extends ChangeNotifier{
     return _getToken().then((value){
       _posts.clear();
       return http.get(
-          url,
-          headers: {"Authorization":value}
+        url,
+        headers: {"Authorization":"Token $value"}
       );
     }).then((value){
       var res = json.decode(value.body);
@@ -53,7 +54,7 @@ class TweetProvider extends ChangeNotifier{
     return _getToken().then((value){
       return http.post(
         url,
-        headers: {"Authorization":value},
+        headers: {"Authorization":"Token $value"},
         body: {'user':1,'tweet':tweet,'file':images}
       );
     }).then((value){

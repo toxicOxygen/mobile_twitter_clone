@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/tweet_provider.dart';
+
 
 class CreateTweetPage extends StatelessWidget {
   static String tag = 'create-tweet-page';
+  String _tweet = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +29,11 @@ class CreateTweetPage extends StatelessWidget {
           )
         ],
       ),
+      backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.only(left: 12,right:12,top: 5),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -42,14 +47,15 @@ class CreateTweetPage extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      TextField(
+                      TextFormField(
                         maxLength: 280,
                         maxLines: 10,
                         minLines: 4,
                         decoration: InputDecoration(
-                            hintText: "What's on your mind?",
-                            border: InputBorder.none
+                          hintText: "What's on your mind?",
+                          border: InputBorder.none
                         ),
+                        onChanged: (val)=>_tweet = val,
                       ),
                       Row(
                         children: <Widget>[
@@ -71,5 +77,14 @@ class CreateTweetPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _createPost(BuildContext context) async{
+    final provider = Provider.of<TweetProvider>(context);
+    return provider.createPost(_tweet, []).then((value){
+
+    }).catchError((e){
+      print(e);
+    });
   }
 }
