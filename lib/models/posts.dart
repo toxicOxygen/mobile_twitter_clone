@@ -45,8 +45,6 @@ class Post {
         usersLike.add(user);
       }
     }
-
-    print("$id >>> $comments >>> $tweet >>> $usersLike");
   }
 
   Map<String, dynamic> toJson() {

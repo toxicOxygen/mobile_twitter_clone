@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/tweet_provider.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 
-class CreateTweetPage extends StatelessWidget {
+class CreateTweetPage extends StatefulWidget {
   static String tag = 'create-tweet-page';
+
+  @override
+  _CreateTweetPageState createState() => _CreateTweetPageState();
+}
+
+class _CreateTweetPageState extends State<CreateTweetPage> {
   String _tweet = '';
+  List<Asset> _images = [];
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
@@ -23,7 +33,7 @@ class CreateTweetPage extends StatelessWidget {
               ),
               textColor: Colors.white,
               child: Text('Tweet'),
-              onPressed: (){},
+              onPressed: ()=>_createPost(context),
               color: Colors.blue,
             ),
           )
@@ -64,7 +74,7 @@ class CreateTweetPage extends StatelessWidget {
                               Icons.image,
                               color: Colors.blue.withAlpha(180),
                             ),
-                            onPressed: (){},
+                            onPressed: ()=> _loasAssets(),
                           )
                         ],
                       )
@@ -73,18 +83,74 @@ class CreateTweetPage extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
+          
+          Container(
+            height: 300,
+            padding: const EdgeInsets.only(left:10,right:10),
+            width: double.infinity,
+            child: GridView.count(
+              crossAxisCount: 3,
+              children: List.generate(
+                _images.length, 
+                (index) => Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: AssetThumb(
+                    asset: _images[index], 
+                    width: 290, 
+                    height: 300
+                  ),
+                )
+              ),
+            ),
+          ),
+
         ],
       ),
     );
   }
 
   Future<void> _createPost(BuildContext context) async{
-    final provider = Provider.of<TweetProvider>(context);
-    return provider.createPost(_tweet, []).then((value){
-
+    final provider = Provider.of<TweetProvider>(context,listen: false);
+    final String images = _images.map((e){
+      return e.getByteData().then((value) =>value.toString());
+    }).toList().join(',');
+    return provider.createPost(_tweet, images).then((value){
+        Navigator.of(context).pop();
     }).catchError((e){
       print(e);
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text('$e'),
+      ));
+    });
+  }
+
+  Future<void> _loasAssets() async{
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+
+    try{
+      resultList = await MultiImagePicker.pickImages(
+        maxImages : 3,
+        enableCamera: true,
+        selectedAssets: _images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Twitter clone",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+    }catch(e){
+      error = e.toString();
+    }
+
+    if(!mounted) return;
+
+    setState(() {
+      _images = resultList;
     });
   }
 }

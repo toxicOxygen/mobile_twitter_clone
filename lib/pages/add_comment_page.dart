@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/tweet_provider.dart';
 
 class AddCommentPage extends StatelessWidget {
   static String tag = 'add-comment-page';
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final int targetPostId = ModalRoute.of(context).settings.arguments;
+    final tweetProvider = Provider.of<TweetProvider>(context,listen: false);//might change listen to true
+    final post = tweetProvider.getPostLocally(targetPostId);
 
     return Scaffold(
       appBar: AppBar(
@@ -27,32 +31,24 @@ class AddCommentPage extends StatelessWidget {
           )
         ],
       ),
+      backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
           Container(
-            constraints: BoxConstraints(
-              maxHeight: height * 0.3,
-              minHeight: height * .15
-            ),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        maxRadius: 30,
-                        minRadius: 25,
-                        backgroundImage: NetworkImage('https://tinyurl.com/yawxco2g'),
-                      ),
-                      SizedBox(height: 10,),
-                    ],
+                  CircleAvatar(
+                    maxRadius: 30,
+                    minRadius: 25,
+                    backgroundImage: NetworkImage('https://tinyurl.com/yawxco2g'),
                   ),
                   SizedBox(width: 15,),
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
                           width: double.infinity,
@@ -74,10 +70,7 @@ class AddCommentPage extends StatelessWidget {
                         ),
                         SizedBox(height: 10,),
                         Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor "
-                          "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "
-                          "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                          "Duis aute irure dolor in reprehenderit in ...",
+                          "${post.tweet}",
                           style: Theme.of(context).textTheme.headline6.copyWith(
                               color: Colors.black54
                           ),

@@ -22,7 +22,7 @@ class TweetDetailPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.chat_bubble_outline),
-        onPressed: ()=>Navigator.of(context).pushNamed(AddCommentPage.tag),
+        onPressed: ()=>Navigator.of(context).pushNamed(AddCommentPage.tag,arguments: post.id),
       ),
       body: ListView.builder(
         itemBuilder: (ctx,i){

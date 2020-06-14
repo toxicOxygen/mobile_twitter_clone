@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './tweet_option_bar.dart';
 import '../models/images.dart';
 import './images_grid_widget.dart';
 
@@ -83,36 +84,7 @@ class TweetCard extends StatelessWidget {
                         height: height * .23,
                         postId: postId,
                       ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            FlatButton.icon(
-                              onPressed: (){},
-                              icon: Icon(Icons.chat_bubble_outline),
-                              label: Text('12'),
-                              textColor: Colors.black54,
-                            ),
-                            FlatButton.icon(
-                              onPressed: (){},
-                              icon: Icon(Icons.refresh),
-                              label: Text('2'),
-                              textColor: Colors.black54,
-                            ),
-                            FlatButton.icon(
-                              onPressed: (){},
-                              icon: Icon(Icons.favorite_border),
-                              label: Text('21'),
-                              textColor: Colors.black54,
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.share,color: Colors.black54,),
-                              onPressed: (){},
-                            )
-                          ],
-                        ),
-                      )
+                      TweetOptionsBar(postId: postId)
                     ],
                   ),
                 )
@@ -124,3 +96,4 @@ class TweetCard extends StatelessWidget {
     );
   }
 }
+
