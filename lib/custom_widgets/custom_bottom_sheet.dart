@@ -6,8 +6,6 @@ class CustomBottomSheet extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     
@@ -27,12 +25,23 @@ class CustomBottomSheet extends StatelessWidget {
               title: Text('Retweet with title'),
               onTap: (){},
             ),
-            RaisedButton(
-              child: Text('Cancel'),
-              onPressed: (){
-                Navigator.of(context).pop();
-                Scaffold.of(context).showBodyScrim(false, 0.1);
-              },
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:8.0),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Cancel'),
+                  ],
+                ),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                  Scaffold.of(context).showBodyScrim(false, 0.1);
+                },
+              ),
             )
           ],
         ),
