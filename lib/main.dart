@@ -16,6 +16,7 @@ import './pages/messages_page.dart';
 import './pages/splash_page.dart';
 import './pages/view_tweet_image_page.dart';
 import './providers/user_provider.dart';
+import './pages/edit_profile_page.dart';
 
 
 void main(){
@@ -31,8 +32,13 @@ class MyApp extends StatelessWidget {
           title: 'Twitter Clone',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            appBarTheme: AppBarTheme(
+              elevation: 0.0,
+              color: Colors.white,
+              iconTheme: IconThemeData(color: Colors.blue),
+            )
           ),
           home: auth.isAuthenticated ? HomePage() : FutureBuilder(
             future: auth.tryAutoLogin(),
@@ -54,7 +60,8 @@ class MyApp extends StatelessWidget {
             SearchTweetPage.tag : (context)=> SearchTweetPage(),
             NotificationsPage.tag : (context)=> NotificationsPage(),
             MessagesPage.tag : (context) => MessagesPage(),
-            TweetImageViewPage.tag : (context)=> TweetImageViewPage()
+            TweetImageViewPage.tag : (context)=> TweetImageViewPage(),
+            EditProfilePage.tag : (context)=> EditProfilePage()
           },
         )
       ),

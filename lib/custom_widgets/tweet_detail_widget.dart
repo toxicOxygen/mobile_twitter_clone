@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/images.dart';
 import './images_grid_widget.dart';
 import '../models/posts.dart';
 

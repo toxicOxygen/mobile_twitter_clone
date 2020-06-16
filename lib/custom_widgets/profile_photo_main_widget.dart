@@ -29,33 +29,36 @@ class ProfilePhotoMainWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left:18.0,top: 10),
-          child: Row(
-            children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Icon(Icons.cake,color: Colors.black54,),
-                  Text(
-                    ' Born February 29,1996',
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ],
-              ),
-              SizedBox(width: 15,),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Icon(Icons.calendar_today,color: Colors.black54,),
-                  Text(
-                    ' Joined August 2011',
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ],
-              ),
-            ],
+          padding: const EdgeInsets.only(left:18.0,top: 10,right: 18),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: <Widget>[
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Icon(Icons.cake,color: Colors.black54,),
+                    Text(
+                      ' Born February 29,1996',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ],
+                ),
+                SizedBox(width: 15,),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Icon(Icons.calendar_today,color: Colors.black54,),
+                    Text(
+                      ' Joined August 2011',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         Padding(
