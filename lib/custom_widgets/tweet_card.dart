@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import './tweet_option_bar.dart';
 import '../models/images.dart';
+import '../models/posts.dart';
+import '../models/comments.dart';
 import './images_grid_widget.dart';
 
 class TweetCard extends StatelessWidget {
-  final String userProfileImageUrl;
-  final String tweet;
-  final List<PostImage> tweetImages;
-  final int postId;
+  final Post post;
+  final Comment comment;
+  final bool isComment;
   final VoidCallback onTap;
 
   TweetCard({
-    this.userProfileImageUrl,
-    this.tweetImages = const [],
     this.onTap,
-    @required this.postId,
-    this.tweet = "Yo I'm on the phone with infinity ward.",
+    this.post,
+    this.comment,
+    this.isComment = false
   });
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final username = !isComment ? post.user.username : comment.user.username;
 
     return Container(
       decoration: BoxDecoration(
@@ -60,31 +61,26 @@ class TweetCard extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: 'Seth Huntsmen ',
+                              text: username,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold
                               )
                             ),
                             TextSpan(
-                              text: '@bk_windfred',
+                              text: ' @bk_$username',
                               style: TextStyle(color: Colors.black45)
                             )
                           ]
                         ),
                       ),
                       Text(
-                        "$tweet",
+                        !isComment?post.tweet:comment.comment,
                         style: TextStyle(color: Colors.black87),
                       ),
                       SizedBox(height: 5,),
-                      tweetImages.isEmpty? Container(height: 0.001,):
-                      ImagesGridWidget(
-                        images: tweetImages,
-                        height: height * .23,
-                        postId: postId,
-                      ),
-                      TweetOptionsBar(postId: postId)
+                      _imageSection(height),
+                      TweetOptionsBar(postId: !isComment? post.id: comment.id)
                     ],
                   ),
                 )
@@ -93,6 +89,17 @@ class TweetCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _imageSection(double height){
+    if(isComment)
+      return Container(height: 0.0001,);
+    return post.images.isEmpty ? Container(height: 0.001,):
+    ImagesGridWidget(
+      images: post.images,
+      height: height * .23,
+      postId: post.id,
     );
   }
 }

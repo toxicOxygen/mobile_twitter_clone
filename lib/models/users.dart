@@ -12,17 +12,18 @@ class User {
   String dateOfBirth;
   List<int> following;
 
-  User(
-      {this.id,
-      this.username,
-      this.email,
-      this.photo,
-      this.coverPhoto,
-      this.bio,
-      this.website,
-      this.location,
-      this.dateOfBirth,
-      this.following});
+  User({
+    this.id,
+    this.username,
+    this.email,
+    this.photo,
+    this.coverPhoto,
+    this.bio,
+    this.website,
+    this.location,
+    this.dateOfBirth,
+    this.following
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];

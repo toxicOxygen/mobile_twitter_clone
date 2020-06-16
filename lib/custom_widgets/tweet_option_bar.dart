@@ -13,7 +13,6 @@ class TweetOptionsBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final tweetProvider = Provider.of<TweetProvider>(context,listen: true);
     final post = tweetProvider.getPostLocally(postId);
     
@@ -33,7 +32,7 @@ class TweetOptionsBar extends StatelessWidget {
           },
         ),
         CustomIconButton(
-          count: 2,
+          count: 0,
           icon: Icon(Icons.refresh),
           onPressed: (){
             Scaffold.of(context).showBodyScrim(true, 0.3);
@@ -62,19 +61,13 @@ class CustomIconButton extends StatelessWidget {
   final int count;
 
   CustomIconButton({
-    this.count,
+    this.count = 0,
     this.icon,
     this.onPressed
   });
 
   @override
   Widget build(BuildContext context) {
-    if (count == 0)
-      return IconButton(
-        icon: icon,
-        onPressed: onPressed,
-        color: Colors.black54,
-      );
     return FlatButton.icon(
       textColor: Colors.black54,
       icon: icon,

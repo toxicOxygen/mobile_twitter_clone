@@ -1,7 +1,9 @@
+import './users.dart';
+
 class Comment {
   int id;
   String comment;
-  int user;
+  User user;
   int post;
   String created;
 
@@ -10,16 +12,16 @@ class Comment {
   Comment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     comment = json['comment'];
-    user = json['user'];
     post = json['post'];
     created = json['created'];
+    user = json['user'] != null ? User.fromJson(json['user']):null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['comment'] = this.comment;
-    data['user'] = this.user;
+    data['user'] = this.user.toJson();
     data['post'] = this.post;
     data['created'] = this.created;
     return data;

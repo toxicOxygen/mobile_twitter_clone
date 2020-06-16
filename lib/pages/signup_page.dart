@@ -143,12 +143,12 @@ class _SignUpPageState extends State<SignUpPage> {
         _authData['password']
     ).then((value){
       setState(() {_isLoading = false; });
-      Navigator.of(context).popUntil((ModalRoute.withName(WelcomePage.tag)));
+      Navigator.of(context).popUntil(ModalRoute.withName(WelcomePage.tag));
       Navigator.of(context).pushReplacementNamed(HomePage.tag);
     }).catchError((er){
       setState(() {_isLoading = false; });
       _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('sign up failed, check credentials and try again'),
+        content: Text('$er'),
         duration: Duration(milliseconds: 1500),
       ));
     });

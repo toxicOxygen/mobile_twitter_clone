@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import '../models/images.dart';
 import './images_grid_widget.dart';
+import '../models/posts.dart';
 
 class TweetDetailWidget extends StatelessWidget {
-  final String tweet;
-  final List<PostImage> images;
-  final int postId;
+
+  final Post post;
 
   TweetDetailWidget({
-    this.tweet = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ",
-    this.images = const [],
-    @required this.postId,
+    this.post
   });
 
   @override
@@ -26,10 +24,10 @@ class TweetDetailWidget extends StatelessWidget {
             backgroundImage: NetworkImage('https://tinyurl.com/yawxco2g'),
           ),
           title: Text(
-            'Virgil van Dijk',
+            post.user.username,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          subtitle: Text('@VirgilvDijk'),
+          subtitle: Text('@bk_${post.user.username}'),
           trailing: IconButton(
             icon: Icon(Icons.keyboard_arrow_down),
             onPressed: (){},
@@ -38,19 +36,19 @@ class TweetDetailWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 13),
           child: Text(
-            tweet,
+            post.tweet,
             style: Theme.of(context).textTheme.headline5.copyWith(
                 color: Colors.black87
             ),
           ),
         ),
-        if(images.isNotEmpty)
+        if(post.images.isNotEmpty)
           Padding(
             padding: const EdgeInsets.all(13.0),
             child: ImagesGridWidget(
               height: height * .3,
-              images: images,
-              postId: postId,
+              images: post.images,
+              postId: post.id,
             ),
           ),
         Container(

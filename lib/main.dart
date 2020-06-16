@@ -15,6 +15,7 @@ import './pages/search_page.dart';
 import './pages/messages_page.dart';
 import './pages/splash_page.dart';
 import './pages/view_tweet_image_page.dart';
+import './providers/user_provider.dart';
 
 
 void main(){
@@ -59,7 +60,8 @@ class MyApp extends StatelessWidget {
       ),
       providers: [
         ChangeNotifierProvider.value(value: AuthProvider()),
-        ChangeNotifierProvider.value(value: TweetProvider())
+        ChangeNotifierProvider.value(value: TweetProvider()),
+        ChangeNotifierProvider.value(value: UserProvider())
       ],
     );
   }

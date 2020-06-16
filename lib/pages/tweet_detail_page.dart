@@ -28,15 +28,12 @@ class TweetDetailPage extends StatelessWidget {
         itemBuilder: (ctx,i){
           if(i == 0){
             return TweetDetailWidget(
-              tweet: post.tweet,
-              images: post.images,
-              postId: post.id,
+              post: post,
             );
           }
-          //TODO replace id with tweet id
           return TweetCard(
-            postId: 1,
-            tweet: post.comments[i-1].comment,
+            comment: post.comments[i-1],
+            isComment: true,
           );
         },
         itemCount: post.comments.length + 1,

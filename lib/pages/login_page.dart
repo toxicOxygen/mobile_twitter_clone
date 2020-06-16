@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
     }).catchError((e){
       setState(() {_isLoading = false; });
       _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Login failed, check credentials and try again'),
+        content: Text('$e'),
         duration: Duration(milliseconds: 1500),
       ));
     });

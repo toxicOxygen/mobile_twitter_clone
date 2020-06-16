@@ -1,9 +1,10 @@
 import './comments.dart';
 import './images.dart';
+import './users.dart';
 
 class Post {
   int id;
-  int user;
+  User user;
   String tweet;
   List<PostImage> images;
   String created;
@@ -21,7 +22,7 @@ class Post {
 
   Post.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    user = json['user'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
     tweet = json['tweet'];
     created = json['created'];
 
@@ -50,8 +51,11 @@ class Post {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['user'] = this.user;
     data['tweet'] = this.tweet;
+
+    if (this.user != null) {
+      data['user'] = this.user.toJson();
+    }
     if (this.images != null) {
       data['images'] = this.images.map((v) => v.toJson()).toList();
     }

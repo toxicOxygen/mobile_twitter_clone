@@ -8,7 +8,6 @@ import 'package:twitter_clone/extras/exceptions.dart';
 class AuthProvider extends ChangeNotifier{
   String _token;
   String _userId;
-  //String _baseUrl = 'https://warm-hollows-55235.herokuapp.com';
   String _baseUrl = "https://kwaku96.pythonanywhere.com";
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -30,8 +29,8 @@ class AuthProvider extends ChangeNotifier{
       'password1':password,
       'password2':password
     }).then((value){
-      if(value.statusCode != 200)
-        throw HttpException('Login failed');
+      if(value.statusCode != 201)
+        throw HttpException('${json.decode(value.body)}');
       return json.decode(value.body);
     }).then((value) async{
       if(value['key'] == null)
@@ -41,6 +40,7 @@ class AuthProvider extends ChangeNotifier{
       return value['key'];
     }).catchError((e){
       print(e);
+      throw HttpException(e.toString());
     });
   }
 
@@ -51,11 +51,11 @@ class AuthProvider extends ChangeNotifier{
       'username':username,
       'password':password,
     }).then((value){
-      return json.decode(value.body);
+      var resBody = json.decode(value.body);
+      if(value.statusCode != 200)
+        throw HttpException('$resBody');
+      return resBody;
     }).then((value) async{
-      if(value['key'] == null){
-        throw HttpException('authenication failed, try again later');
-      }
       final key = value['key'];
       SharedPreferences prefs = await _prefs;
       prefs.setString('token', key);
@@ -64,7 +64,7 @@ class AuthProvider extends ChangeNotifier{
       notifyListeners();
     }).catchError((e){
       print(e);
-      return e;
+      throw HttpException(e.toString());
     });
   }
 
