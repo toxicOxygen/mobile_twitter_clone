@@ -10,7 +10,7 @@ class TweetDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String,dynamic> t = ModalRoute.of(context).settings.arguments;
-    Post post = t['post'];
+    Post post = t['post'].post;
 
     return Scaffold(
       backgroundColor: Colors.white,

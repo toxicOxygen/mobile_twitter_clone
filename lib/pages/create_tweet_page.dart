@@ -40,72 +40,74 @@ class _CreateTweetPageState extends State<CreateTweetPage> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 12,right:12,top: 5),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                CircleAvatar(
-                  maxRadius: 25,
-                  minRadius: 20,
-                  backgroundImage: NetworkImage('https://tinyurl.com/yakkyll3'),
-                ),
-                SizedBox(width: 10,),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      TextFormField(
-                        maxLength: 280,
-                        maxLines: 10,
-                        minLines: 4,
-                        decoration: InputDecoration(
-                          hintText: "What's on your mind?",
-                          border: InputBorder.none
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 12,right:12,top: 5),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar(
+                    maxRadius: 25,
+                    minRadius: 20,
+                    backgroundImage: NetworkImage('https://tinyurl.com/yakkyll3'),
+                  ),
+                  SizedBox(width: 10,),
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        TextFormField(
+                          maxLength: 280,
+                          maxLines: 10,
+                          minLines: 4,
+                          decoration: InputDecoration(
+                            hintText: "What's on your mind?",
+                            border: InputBorder.none
+                          ),
+                          onChanged: (val)=>_tweet = val,
                         ),
-                        onChanged: (val)=>_tweet = val,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(
-                              Icons.image,
-                              color: Colors.blue.withAlpha(180),
-                            ),
-                            onPressed: ()=> _loasAssets(),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          
-          Container(
-            height: 300,
-            padding: const EdgeInsets.only(left:10,right:10),
-            width: double.infinity,
-            child: GridView.count(
-              crossAxisCount: 3,
-              children: List.generate(
-                _images.length, 
-                (index) => Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child: AssetThumb(
-                    asset: _images[index], 
-                    width: 290, 
-                    height: 300
-                  ),
-                )
+                        Row(
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(
+                                Icons.image,
+                                color: Colors.blue.withAlpha(180),
+                              ),
+                              onPressed: ()=> _loadAssets(),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-          ),
 
-        ],
+            Container(
+              height: 300,
+              padding: const EdgeInsets.only(left:10,right:10),
+              width: double.infinity,
+              child: GridView.count(
+                crossAxisCount: 3,
+                children: List.generate(
+                  _images.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: AssetThumb(
+                      asset: _images[index],
+                      width: 290,
+                      height: 300
+                    ),
+                  )
+                ),
+              ),
+            ),
+
+          ],
+        ),
       ),
     );
   }
@@ -125,9 +127,9 @@ class _CreateTweetPageState extends State<CreateTweetPage> {
     });
   }
 
-  Future<void> _loasAssets() async{
+  Future<void> _loadAssets() async{
     List<Asset> resultList = List<Asset>();
-    String error = 'No Error Dectected';
+    String error = 'No Error Detected';
 
     try{
       resultList = await MultiImagePicker.pickImages(

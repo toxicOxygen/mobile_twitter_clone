@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import '../models/users.dart';
 import './profile_photo_widget.dart';
 
 class ProfilePhotoMainWidget extends StatelessWidget {
+  final User user;
+
+  ProfilePhotoMainWidget({
+    this.user,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -10,12 +17,15 @@ class ProfilePhotoMainWidget extends StatelessWidget {
         Container(
             padding: const EdgeInsets.only(left: 18,top: 10),
             width: double.infinity,
-            child: Text('Baffour Kusi',style: TextStyle(fontWeight: FontWeight.bold),)
+            child: Text(user.username,style: TextStyle(fontWeight: FontWeight.bold),)
         ),
         Container(
             padding: const EdgeInsets.only(left: 18),
             width: double.infinity,
-            child: Text('@MOBZ',style: TextStyle(color: Colors.black54),)
+            child: Text(
+              '@bk_${user.username}',
+              style: TextStyle(color: Colors.black54),
+            )
         ),
         Container(
           padding: const EdgeInsets.only(left: 18,right: 18,top: 10),

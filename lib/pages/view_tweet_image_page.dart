@@ -2,24 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import '../providers/tweet_provider.dart';
-import '../models/posts.dart';
+import 'dart:math' as math;
 
 class TweetImageViewPage extends StatelessWidget {
   static String tag = 'tweet-images-view-page';
 
+  final List<Color> _colors = [
+    Colors.brown,
+    Color.fromRGBO(52, 58, 64, 1.0),
+    Color.fromRGBO(55, 125, 61, 1.0),
+    Color.fromRGBO(180, 153, 124, 1.0),
+    Color.fromRGBO(38, 39, 47, 1.0)
+  ];
+
   @override
   Widget build(BuildContext context) {
     Map<String,int> id = ModalRoute.of(context).settings.arguments;
-    Post post = Provider.of<TweetProvider>(
+    var post = Provider.of<TweetProvider>(
       context,
       listen: false
     ).getPostLocally(id['id']);
 
+    var index = math.Random().nextInt(_colors.length) ;
+
     return Scaffold(
-      backgroundColor: Colors.brown,
+      backgroundColor: _colors[index],
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.white),
         leading: IconButton(
           icon: Icon(Icons.clear),
           onPressed: (){
@@ -37,11 +48,11 @@ class TweetImageViewPage extends StatelessWidget {
         child: CarouselSlider.builder(
           itemBuilder: (ctx,i){
             return Image.network(
-              post.images[i].image,
+              post.post.images[i].image,
               fit: BoxFit.cover,
             );
           },
-          itemCount: post.images.length,
+          itemCount: post.post.images.length,
           options: CarouselOptions(
             autoPlay: false,
             viewportFraction: 1,

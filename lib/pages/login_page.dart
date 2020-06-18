@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:twitter_clone/providers/auth_providers.dart';
-import './home_page.dart';
+import '../pages/root_screen.dart';
+import '../providers/auth_providers.dart';
 import '../custom_widgets/loading_widget.dart';
 import './signup_page.dart';
 import '../extras/validators.dart';
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
     ).then((value){
       setState(() {_isLoading = false; });
       Navigator.of(context).pop();
-      Navigator.of(context).pushReplacementNamed(HomePage.tag);
+      Navigator.of(context).pushReplacementNamed(RootScreen.tag);
     }).catchError((e){
       setState(() {_isLoading = false; });
       _scaffoldKey.currentState.showSnackBar(SnackBar(

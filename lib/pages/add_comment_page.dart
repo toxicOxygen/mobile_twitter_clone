@@ -70,7 +70,7 @@ class AddCommentPage extends StatelessWidget {
                         ),
                         SizedBox(height: 10,),
                         Text(
-                          "${post.tweet}",
+                          "${post.post.tweet}",
                           style: Theme.of(context).textTheme.headline6.copyWith(
                               color: Colors.black54
                           ),
