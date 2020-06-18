@@ -43,6 +43,7 @@ class UserProvider extends ChangeNotifier{
   }
 
   Future<void> fetchCurrentUser() async {
+    print("calling fetch user....");
     var url = "$_baseUrl/api/v1/users/current_user/";
     return _getToken().then((value){
       return value;

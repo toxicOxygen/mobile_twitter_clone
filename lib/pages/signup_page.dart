@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '../pages/root_screen.dart';
 import '../providers/auth_providers.dart';
 import '../extras/validators.dart';
 import '../custom_widgets/loading_widget.dart';
-import './home_page.dart';
 import './welcome_page.dart';
 import 'package:provider/provider.dart';
 
@@ -144,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
     ).then((value){
       setState(() {_isLoading = false; });
       Navigator.of(context).popUntil(ModalRoute.withName(WelcomePage.tag));
-      Navigator.of(context).pushReplacementNamed(HomePage.tag);
+      Navigator.of(context).pushReplacementNamed(RootScreen.tag);
     }).catchError((er){
       setState(() {_isLoading = false; });
       _scaffoldKey.currentState.showSnackBar(SnackBar(

@@ -16,8 +16,8 @@ class TweetOptionsBar extends StatelessWidget {
     final tweetProvider = Provider.of<TweetProvider>(context,listen: true);
     final post = tweetProvider.getPostLocally(postId);
     
-    final List<int> likesCount = post.usersLike?? [];
-    final commentsCount = post.comments?? [];
+    final List<int> likesCount = post.post.usersLike?? [];
+    final commentsCount = post.post.comments?? [];
 
     return Row(
       mainAxisSize: MainAxisSize.min,

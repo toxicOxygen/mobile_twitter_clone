@@ -11,14 +11,15 @@ class Post {
   List<Comment> comments;
   List<int> usersLike;
 
-  Post(
-      {this.id,
-        this.user,
-        this.tweet,
-        this.images,
-        this.created,
-        this.comments,
-        this.usersLike});
+  Post({
+    this.id,
+    this.user,
+    this.tweet,
+    this.images,
+    this.created,
+    this.comments,
+    this.usersLike
+  });
 
   Post.fromJson(Map<String, dynamic> json) {
     id = json['id'];

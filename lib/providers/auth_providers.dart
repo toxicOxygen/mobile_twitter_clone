@@ -95,7 +95,7 @@ class AuthProvider extends ChangeNotifier{
   Future<void> getCurrentUserDetail(){
     final url = '$_baseUrl/api/v1/users/current_user/';
     final headers = {
-      'Authorization':token,
+      'Authorization':'Token $token',
     };
     return http.get(url,headers: headers).then((value){
       return json.decode(value.body);

@@ -1,6 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../pages/profile_page.dart';
 import './tweet_option_bar.dart';
-import '../models/images.dart';
 import '../models/posts.dart';
 import '../models/comments.dart';
 import './images_grid_widget.dart';
@@ -30,10 +31,10 @@ class TweetCard extends StatelessWidget {
           bottom: BorderSide(color: Colors.black12)
         )
       ),
-      padding: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.only(top: 3),
       constraints: BoxConstraints(
         maxHeight: height * 0.45,
-        minHeight: height * 0.15,
+        minHeight: height * 0.10,
         maxWidth: width
       ),
       child: Card(
@@ -65,11 +66,17 @@ class TweetCard extends StatelessWidget {
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold
-                              )
+                              ),
+                              recognizer: TapGestureRecognizer()..onTap = (){
+                                Navigator.of(context).pushNamed(
+                                    ProfilePage.tag,
+                                    arguments: isComment?comment.user:post.user
+                                );
+                              },
                             ),
                             TextSpan(
                               text: ' @bk_$username',
-                              style: TextStyle(color: Colors.black45)
+                              style: TextStyle(color: Colors.black45),
                             )
                           ]
                         ),
